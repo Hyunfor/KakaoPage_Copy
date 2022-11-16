@@ -1,0 +1,25 @@
+/* html
+<div class="layout-error">
+	<h2 class="tit1">ERROR</h2>
+	<p class="txt1">요청하신 페이지를 찾을 수 없습니다.</p>
+	<p class="txt2">방문하신 페이지는 더 이상 존재하지 않거나 잘못된 접근 입니다. <br>확인 후 이용 부탁드립니다.</p>
+	<div><button type="button" class="hgbtn yello01">메인페이지로 이동</button></div>
+</div>
+*/
+
+/*에러 페이지*/
+.layout-error {position: relative;padding: 15% 4%;text-align: center;line-height: 1.5;}
+.layout-error h2 {font-size: 60px;font-weight: 600;letter-spacing: 15px;color: #fee63b;line-height: 1;}
+.layout-error h2::after {content: "";display: block;width: 100px;height: 3px;margin: 0 auto;background-color: #fee63b;margin-top: 1%;}
+.layout-error .txt1 {font-size: 50px;padding: 1% 0;}
+.layout-error .txt2 {margin-bottom: 30px;}
+.layout-error .hgbtn {font-size: 18px;}
+
+@media all and (max-width: 1023px){
+	/*에러 페이지*/
+	.layout-error h2 {font-size: 30px;letter-spacing: 15px;margin-bottom: 15px;}
+	.layout-error h2::after {margin-top: 15px;width: 100px;}
+	.layout-error .txt1 {font-size: 20px;}
+	.layout-error .txt2 {margin-bottom: 30px;}
+	.layout-error .hgbtn {font-size: 1rem;}
+}

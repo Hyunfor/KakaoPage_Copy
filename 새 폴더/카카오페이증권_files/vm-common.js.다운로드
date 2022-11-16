@@ -1,0 +1,228 @@
+var winWidth = $(window).width();
+var docH = (window.innerHeight || self.innerHeight || document.documentElement.clientHeight || document.body.clientHeight);
+var docW = (window.innerWidth || self.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
+
+function pop_open(obj, width){
+	$(obj).lypop({
+		type : "normal",
+		popWidth : "96%",
+		popHeight : "auto"
+	});
+}
+function pop_close(obj, removerOpts){
+	if(obj == 'all'){
+		$.fn.lypop.lyClose('.lypop', removerOpts);
+	}else {
+		$.fn.lypop.lyClose(obj, removerOpts);
+	}
+}
+
+// 가로스크롤 리스트
+function hscrList(obj){
+	var wSum = 0;
+	$(obj).each(function(index){
+		wSum += $(this).outerWidth(true);
+	});
+	$(obj).closest("ul").css("minWidth", wSum+10);
+}
+
+//swiper custom pagination Active Class
+function swiperCustomPaginationActive(el, index){
+	$(el).removeClass('active');
+	$(el).eq(index).addClass('active');
+}
+
+//swiper custom pagination Control
+function swiperCustomBulletControl(el){
+	$(el).on('click', function(){
+		var idx = $(this).index();
+		swiperCustomPaginationActive(el, idx);
+		openGuideSlider.slideTo((idx+1));
+	});
+}
+
+// faq
+function faqFoldFn(){
+	// faq 리스트 토글
+	$('#faq .article .q').click(function(){
+		$(this).closest('li').toggleClass('show');
+		$(this).next('.a').slideToggle(250);
+		return false;
+	});
+
+	// faq 페이지 탭 sort 기능
+	$('#faq-sort-menu li').on('click', function(){
+		var faqId = $(this).find('a').attr('href');
+		var faqTitle = $(this).find('a').text();
+		var faqTopPos = $('#faq').offset().top;
+
+		$('#faq-title').text(faqTitle);
+
+		$('#faq-sort-menu li').removeClass('active');
+		$(this).addClass('active');
+
+		$('#faq li').hide().removeClass('show');
+		$('#faq li[data-sortid='+faqId+']').show();
+
+		/*$('html, body').animate({
+			scrollTop: faqTopPos-200
+		}, 250);*/
+
+		return false;
+	});
+}
+
+$(function(){
+/* start */
+	//브라우저 업데이트 얼럿 노출
+	brwAlert();
+	iOS();
+	headerFn();
+
+	var headerHieght = $(".header-wrap").outerHeight();
+	// 페이지 상단 여백
+	$("#wrap").css({
+		"padding-top" : headerHieght
+	});
+
+	if($('.main-visual ').length){
+		var mainVisual = new Swiper('.main-visual .swiper-container', {
+			effect : "fade",
+			fadeEffect: {
+				crossFade: true
+			},
+		});
+	}
+
+	if($('.open-guide-slider').length){
+		openGuideSlider = new Swiper('.open-guide-slider .swiper-container', {
+			effect : 'fade',
+			speed : 800,
+			autoplay: {
+				delay: 4500,
+			},
+			loop : true,
+			fadeEffect: {
+				crossFade: true
+			},
+			pagination: {
+				el: '.mobile-opening-step3 .swiper-pagination',
+				clickable: true,
+				renderBullet: function (index, className) {
+					return '<span class="' + className + '">' + (index + 1) + '</span>';
+				},
+			},
+			on : {
+				init : function(){
+					// console.log(this.realIndex);
+					swiperCustomPaginationActive('.open-guide-pagination li', this.realIndex);
+				},
+				slideChange : function (){
+					swiperCustomPaginationActive('.open-guide-pagination li', this.realIndex);
+				}
+			}
+		});
+		swiperCustomBulletControl('.open-guide-pagination li', openGuideSlider);
+	}
+
+	if($('#faq').length){
+		faqFoldFn();
+	}
+
+	/**
+	 * wow scroll animate
+	 * @type {WOW}
+	 */
+	wow = new WOW({
+		animateClass: 'animated',
+		offset: 100
+	});
+
+	if($('.wow').length) wow.init();
+
+	/**
+	 * wow list 시간차 추가
+	 */
+	var view_item = 4; // 한 line에 보이는 아이템 갯 수
+	$('ul.list-wrap > li.item').each(function(idx){
+		$(this).attr('data-wow-delay', '0.'+(idx%view_item)+'s');
+	});
+
+	// A tag tel : 기능 분기
+	// $('a[href^="tel:"]').css("border", "1px red solid");
+	var deviceCheck = $.fn.lypop.deviceCheck();
+	if (deviceCheck == "pc") {
+		$('a[href^="tel:"]').css({
+			"cursor" : "default"
+		});
+	}
+	$('a[href^="tel:"]').on("click", function(e){
+		// alert(deviceCheck);
+		if (deviceCheck == "pc") {
+			e.preventDefault();
+		}
+	});
+
+/* end */
+});
+
+$(window).on("load", function(){
+	$('body').addClass("loaded");
+});
+
+// window resize callback
+var resizeEnd;
+$(window).resize(function(){
+	var docW = (window.innerWidth || self.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
+	clearTimeout(resizeEnd);
+
+	resizeEnd = setTimeout(function(){
+		if(docW >= 1024){
+			$("#gnb-wrap").css({
+				'height' : 'initial'
+			});
+		}
+		// console.log("resize end");
+	},750);
+});
+
+function headerFn(){
+	var $gnb = $("#gnb-wrap");
+	var $depth1 = $("#gnb-wrap > ul > li");
+
+	if(docW >= 1024){
+		$depth1.on("mouseenter", function(){
+			var bgHeight = $(this).find(">ul").outerHeight();
+			$depth1.find(">ul").hide();
+			$(this).find(">ul").stop().fadeIn(300);
+
+			$(".header-wrap .bg").css({
+				"height" : bgHeight,
+				"opacity" : 1
+			});
+		});
+		$(".header-wrap").on("mouseleave", function(){
+			$depth1.find(">ul").stop().fadeOut(100);
+			$(".header-wrap .bg").css({
+				"height" : 0,
+				"opacity" : 0
+			});
+		});
+	}
+
+	$(".btn-hambug.btn-gnb-control").on("click", function(){
+		if(winWidth > 1024){
+
+		}else {
+			$("#gnb-wrap").height(docH-100);
+		}
+
+		$(this).toggleClass("active");
+		$gnb.slideToggle(350);
+	});
+}
+
+
+
+
+

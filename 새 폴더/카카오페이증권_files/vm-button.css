@@ -1,0 +1,67 @@
+ /* 버튼 */
+.hgbtn {display:inline-block;vertical-align: middle;border:0;border:none;outline:none;background:none;border-radius: 0px;-webkit-appearance:none;padding: 5px 15px;font-size: 14px;text-align: center;
+-webkit-transition-duration: 0.4s;
+-moz-transition-duration: 0.4s;
+-ms-transition-duration: 0.4s;
+-o-transition-duration: 0.4s;
+transition-duration: 0.4s;
+}
+
+/* 버튼 컬러 */
+.hgbtn.grey01 {color: #fff !important;background-color: #777;border:1px #000 solid;}
+.hgbtn.grey01:hover {background-color:#858585;}
+
+.hgbtn.btn-white-line01 {color: #222 !important;background-color: #fff;border:1px #222 solid;}
+.hgbtn.btn-white-line01:hover {background-color: #f6f6f6;}
+
+.hgbtn.white-line02 {color: #222 !important;background-color: #fff;border:1px #c8c8c8 solid;}
+.hgbtn.white-line02:hover {background-color: #f6f6f6;}
+
+.hgbtn.yello01 {color: #222 !important;background-color: #ffdf00;border:1px #ffdf00 solid;}
+.hgbtn.yello01:hover {background-color: #fee63b;}
+
+.hgbtn.red01 {color: #fff !important;background-color: #e33a72;border:1px #e96692 solid;}
+.hgbtn.red01:hover {background-color: #eb497f;}
+
+.hgbtn.radius {border-radius: 30px;}
+
+.hgbtn[disabled] {cursor: default;background: #ddd !important;border:1px #a0a0a0 solid;color: #888 !important;}
+
+/*상품공지 버튼 추가*/
+.hgbtn.fund {
+	display: inline-block;
+	vertical-align: middle;
+	outline: none;
+	background: none;
+	border-radius: 0;
+	padding: 2px 5px;
+	font-size: 12px;
+	text-align: center;
+	margin-bottom: 3px;
+	-webkit-apperance: none;
+	-webkit-transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	-ms-transition-duration: 0.4s;
+	-o-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+
+}
+
+/* 버튼 사이즈 */
+.hgbtn.big {padding: 25px 20px;font-size: 20px;font-weight: 600;}
+.hgbtn.big2 {padding: 18px 30px;font-size: 20px;font-weight: 500;}
+.hgbtn.medium {padding: 12px 20px;font-size: 14px;font-weight: 500;}
+
+.hgbtn.mw120 {min-width: 120px;}
+
+@media all and (max-width: 1023px) {
+	/* 버튼 */
+	.hgbtn {padding: 3px 10px;font-size: 0.9rem;}
+
+	/* 버튼 사이즈 */
+	.hgbtn.big {padding: 15px 10px;font-size: 1.3rem;}
+	.hgbtn.big2 {padding: 10px 15px;font-size: 1.1rem;}
+	.hgbtn.medium {padding: 6px 10px;font-size: 1rem;}
+}
+
+/**/

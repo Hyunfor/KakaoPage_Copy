@@ -335,3 +335,12 @@ html {
   }
   
   /* 커스텀 */
+
+  .top-bar {
+    height: 200px;
+    background-color: #afafaf;
+  }
+  .con {
+    max-width:1140px;
+    
+  }
