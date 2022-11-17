@@ -339,30 +339,51 @@ html {
   .con {
     max-width:1140px;
   }
+  
   .top-bar {
     height: 72px;
-    border-bottom: 1px solid #e9e9e9;
+    border-bottom:1px solid #e1e1e1;
   }
   
   .top-bar > .con > .menu-box-1 > ul > li > a {
     font-size: 17px;
     font-weight: bold;
-    color: #1e1e1e;
+    color:#1e1e1e;
     padding: 0 15px;
-    position:relative;
+    position: relative;
   }
   
   .top-bar > .con > .menu-box-1 > ul > li > a::after {
-    content: "";
+    content:"";
     background-color: black;
-    position:absolute;
-    bottom:0;
-    left:0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 0;
     height: 3px;
-    transition: width 0.3s;
+    transition: width .3s;
   }
   
-  .top-bar > .con > .menu-box-1 > ul > li:hover > a::after{
+  .top-bar > .con > .menu-box-1 > ul > li:hover > a::after {
     width: 100%;
+  }
+  
+  .top-bar > .con > .menu-box-1 > ul > li > ul {
+    display:none;
+    position:absolute;
+  }
+  
+  .top-bar > .con > .menu-box-1 > ul > li:hover > ul {
+    display: block;
+  }
+  
+  .top-bar > .con > .menu-box-1 > ul > li > ul > li > a {
+    color:#666666;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 10px 0px;
+  }
+  
+  .top-bar > .con > .menu-box-1 > ul > li > ul > li:hover > a {
+    color:#1e1e1e;
   }
