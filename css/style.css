@@ -334,81 +334,222 @@ html {
     flex:1 0 0;
   }
   
-  /* 커스텀 */
+/* 커스텀 */
+
+/* 스크롤바 */
+/*//Chrome, Safari용 스크롤 바*/
+::-webkit-scrollbar {width: 10px;height: 6px;}
+::-webkit-scrollbar-track {background: #e1e1e1;}
+::-webkit-scrollbar-thumb {background: #222;border-radius: 10px;border:1px #fff solid;opacity: .5;}
+::-webkit-scrollbar-thumb:hover {background: #999;opacity: 1;}
+::-webkit-scrollbar-track-piece {background: #fff;}
+/* 스크롤바 */
+
+/* 고정형 .con 시작 */
+.con-min-width {
+  min-width:1140px;
+}
+
+.con {
+  width:1140px;
+}
+
+@media(max-width : 1024px){
+  .visible-on-md-up {
+    display: none;
+  }
+}
+
+@media(min-width : 1025px){
+  .visible-on-md-down {
+    display: none;
+  }
+}
+/* 모바일 탑바 시작 */
 
 body {
-background-color: grey;
-height: 10000px;
+  height: 10000px;
+  background-color: #afafaf;
 }
-.con {
-max-width:1140px;
+@media(max-width : 1024px){
+  html.btn-toggle-menu-box-1-actived,
+  html.btn-toggle-menu-box-1-actived > body {
+    overflow: hidden;
+  }
 }
 
+.mobile-top-bar {
+  height: 57px;
+  background-color: white;
+  border-bottom: 1px solid #e9e9e9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 30px;
+  box-sizing:border-box;
+  transition:height .3s;
+  overflow:hidden;
+}
+
+html.btn-toggle-menu-box-1-actived .mobile-top-bar {
+  height: 100%;
+}
+
+.mobile-top-bar > div {
+  height: 57px;
+}
+
+/* 토글 버튼  */
+.btn-toggle-menu-box-1 {
+  width: 30px;
+  height: 30px;
+  border:10px solid white;
+  position: relative;
+  cursor:pointer;
+}
+
+.btn-toggle-menu-box-1 > div {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 100%;
+  height: 10%;
+  background-color: black;
+  transition: transform .2s cubic-bezier(1,.3,.37,1.48), top .2s;
+  transform:translateX(-50%) translateY(-50%) rotate(0);
+}
+
+.btn-toggle-menu-box-1 > div:last-child {
+  top: 70%;
+  transform:translateX(-50%) translateY(-50%) rotate(0);
+}
+
+html.btn-toggle-menu-box-1-actived .mobile-top-bar .btn-toggle-menu-box-1 > div {
+  top: 50%;
+  transform:translateX(-50%) translateY(-50%) rotate(45deg);
+}
+
+html.btn-toggle-menu-box-1-actived .mobile-top-bar .btn-toggle-menu-box-1 > div:last-child {
+  top: 50%;
+  transform:translateX(-50%) translateY(-50%) rotate(-45deg);
+}
+/* 토글 버튼  */
+
+/* 메뉴박스-1 */
+
+.mobile-top-bar .menu-box-1 {
+  background-color: #afafaf;
+  overflow-y:auto;
+  height: calc(100% - 150px);
+}
+
+
+.mobile-top-bar .menu-box-1 ul > li > a {
+  
+  display: block;
+  font-size: 15.6px;
+}
+.mobile-top-bar .menu-box-1 ul > li:hover > a {
+  color:black;
+}
+
+.mobile-top-bar .menu-box-1 > ul > li > a {
+  color:#1e1e1e;
+  font-weight: 600;
+  padding: 7px 0px;
+}
+
+.mobile-top-bar .menu-box-1 > ul ul > li > a {
+  color:#777777;
+  font-weight: 500;
+  padding: 7px 7px;
+}
+
+/* 모바일 탑바 끝 */
+
+/* 탑바시작 */
 .top-bar {
-position:fixed;
-top:0;
-left:0;
-width: 100%;
-height: 72px;
-border-bottom:1px solid #e1e1e1;
-background-color: white;
+  height: 72px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
 }
 
-.top-bar > .con > .menu-box-1 > ul > li > a {
-font-size: 17px;
-font-weight: bold;
-color:#1e1e1e;
-padding: 0 10px;
-position: relative;
+
+.top-bar  .menu-box-1 ul > li > a {
+  font-size: 17px;
 }
 
-.top-bar > .con > .menu-box-1 > ul > li > a::after {
-content:"";
-background-color: black;
-position: absolute;
-bottom: 0;
-left: 0;
-width: 0;
-height: 3px;
-transition: width .3s;
+
+.top-bar  .menu-box-1 > ul > li > a {
+  font-weight: 600;
+  color:#1e1e1e;
+  padding: 0 30px;
+  position: relative;
 }
 
-.top-bar > .con > .menu-box-1 > ul > li:hover > a::after {
-width: 100%;
+.top-bar  .menu-box-1 > ul > li > a::after {
+  content:"";
+  display: block;
+  background-color: black;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  transition: width .3s;
 }
 
-.top-bar > .con > .menu-box-1 > ul > li > ul {
-position: absolute;
-opacity:0;
-visibility:hidden;
-transition: visibility .3s, opacity .2s;
-/*   visibility:hidden; opacity와 기능은 동일하나 클릭이 불가능*/ 
+.top-bar  .menu-box-1 > ul > li:hover > a::after {
+  width: 100%;
 }
 
-.top-bar > .con > .menu-box-1 > ul > li:hover > ul {
-opacity:1;
-visibility:visible;
-transition: visibility .3s, opacity .5s;
+.top-bar  .menu-box-1 > ul > li > ul {
+  /*   display: none; */
+  visibility:hidden;
+  position:absolute;
+  opacity:0;
+  transition: visibility .3s, opacity .3s;
+  padding: 17px 0;
 }
 
-.top-bar > .con > .menu-box-1 > ul > li > ul > li > a {
-color:#666666;
-font-weight: bold;
-font-size: 17px;
-padding: 15px 10px;
-display: block;
+.top-bar  .menu-box-1 > ul > li:hover > ul {
+  /*   display: block; */
+  visibility:visible;
+  transition: visibility .5s, opacity .5s;
+  opacity: 1;
 }
 
-.top-bar > .con > .menu-box-1 > ul > li > ul > li:hover > a {
-color:#1e1e1e;
+.top-bar  .menu-box-1 > ul > li > ul > li > a {
+  color:#666666;
+  font-weight: 500;
+  padding: 10px 0;
+  display: block;
+  white-space:nowrap;
 }
 
-.top-bar > .con > .menu-box-1 > .bg{
-position:absolute;
-top:100%;
-left:0;
-width: 100%;
-height: 0;
-transition:height .3s;
-background-color: white;
+.top-bar  .menu-box-1 > ul > li > ul > li:hover > a {
+  color:#1e1e1e;
 }
+
+.top-bar  .menu-box-1 > .bg {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  left: 0;
+  width: 100%;
+  transition:height .2s;
+  height: 0;
+  border-top: 1px solid #e9e9e9;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.top-bar  .menu-box-1 > .bg.active {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* 탑바끝 */
